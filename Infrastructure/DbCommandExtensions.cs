@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Data;
 
-namespace MonoTest
+namespace MonoTest.Infrastructure
 {
     public static class DbCommandExtensions
     {

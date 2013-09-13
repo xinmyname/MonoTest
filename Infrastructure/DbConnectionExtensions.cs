@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace MonoTest
+namespace MonoTest.Infrastructure
 {
     public static class DbConnectionExtensions
     {

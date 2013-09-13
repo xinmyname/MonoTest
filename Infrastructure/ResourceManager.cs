@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace MonoTest
+namespace MonoTest.Infrastructure
 {
 	public class ResourceStore
 	{
