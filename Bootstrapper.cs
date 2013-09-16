@@ -90,33 +90,3 @@ namespace MonoTest
 
 	}
 }
-
-
-#if false
-            var log = container.Resolve<ILog>();
-
-			try
-			{
-				log.Info("Starting...");
-
-                var resStore = container.Resolve<ResourceStore>();
-                var settingsStore = container.Resolve<SettingsStore>();
-				Settings settings = settingsStore.Load();
-
-				if (String.IsNullOrEmpty(settings.DatabasePath))
-				{
-					settings.DatabasePath = DocumentPath.For("MonoTest","s3db");
-					resStore.Deploy("MonoTest.empty.s3db", settings.DatabasePath);
-					settingsStore.Save(settings);
-				}
-
-                var itemStore = container.Resolve<ItemStore>();
-				itemStore.Add(new Item("Test Item", "A robust, swarthy test item."));
-
-				log.Info("Done!");
-			}
-			catch (Exception ex)
-			{
-				log.Fatal(ex);
-			}
-#endif
