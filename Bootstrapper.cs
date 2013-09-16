@@ -86,7 +86,5 @@ namespace MonoTest
 
             _log.Info("Stopped. Goodbye!");
         }
-
-
 	}
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 
 namespace MonoTest.Infrastructure
@@ -58,10 +57,15 @@ namespace MonoTest.Infrastructure
 			if (resStream == null)
 				return false;
 
-			Directory.CreateDirectory(Path.GetDirectoryName(destPath));
+		    string destDir = Path.GetDirectoryName(destPath);
+
+            if (destDir == null)
+		        return false;
+
+			Directory.CreateDirectory(destDir);
 
 			using (resStream)
-			using (FileStream destStream = new FileStream(destPath, FileMode.Create))
+			using (var destStream = new FileStream(destPath, FileMode.Create))
 			{
 				resStream.CopyTo(destStream);
 			}

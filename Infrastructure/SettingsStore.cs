@@ -39,7 +39,12 @@ namespace MonoTest.Infrastructure
 
         public void Save(Settings settings)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(_settingsPath));
+            string settingsDir = Path.GetDirectoryName(_settingsPath);
+
+            if (settingsDir == null)
+                return;
+
+            Directory.CreateDirectory(settingsDir);
 
             using (var stream = new FileStream(_settingsPath, FileMode.Create)) 
                 _serializer.WriteObject(stream, settings);

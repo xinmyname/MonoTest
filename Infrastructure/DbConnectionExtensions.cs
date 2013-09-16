@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace MonoTest.Infrastructure
 {
@@ -79,7 +77,7 @@ namespace MonoTest.Infrastructure
             IDbCommand cmd = CreateCommand(con, text, paramObj);
             var dr = cmd.ExecuteReader();
 
-            while (dr.Read())
+            while (dr != null && dr.Read())
             {
                 var result = (T)Activator.CreateInstance(typeof(T));
 
@@ -115,7 +113,8 @@ namespace MonoTest.Infrastructure
                 yield return result;
             }
 
-            dr.Close();
+            if (dr != null)
+                dr.Close();
         }
     }
 

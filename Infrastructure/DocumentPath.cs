@@ -5,7 +5,7 @@ namespace MonoTest.Infrastructure
 {
     public static class DocumentPath
     {
-        public static string Get()
+        public static string UserDocuments()
         {
             if (Environment.OSVersion.Platform == PlatformID.Unix)
                 return String.Format("{0}{1}Documents",
@@ -19,7 +19,7 @@ namespace MonoTest.Infrastructure
         {
             return String.Format("{1}{0}{4}{0}{2}.{3}",
                                  Path.DirectorySeparatorChar,
-                                 DocumentPath.Get(),
+                                 UserDocuments(),
                                  name,
                                  extension,
                                  typeof(DocumentPath).Assembly.GetName().Name);
@@ -30,7 +30,7 @@ namespace MonoTest.Infrastructure
         {
             return String.Format("{1}{0}{4}{0}{5}{0}{2}.{3}",
                                  Path.DirectorySeparatorChar,
-                                 DocumentPath.Get(),
+                                 UserDocuments(),
                                  name,
                                  extension,
                                  typeof(DocumentPath).Assembly.GetName().Name,
@@ -41,7 +41,7 @@ namespace MonoTest.Infrastructure
         {
             return String.Format("{1}{0}{4}{0}{5}{0}{6}{0}{2}.{3}",
                                  Path.DirectorySeparatorChar,
-                                 DocumentPath.Get(),
+                                 UserDocuments(),
                                  name,
                                  extension,
                                  typeof(DocumentPath).Assembly.GetName().Name,
