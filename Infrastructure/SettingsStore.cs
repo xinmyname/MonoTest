@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using MonoTest.Models;
@@ -15,17 +16,23 @@ namespace MonoTest.Infrastructure
             _serializer = new DataContractJsonSerializer(typeof(Settings));
         }
 
-        public Settings Load()
+        public Settings Load(Func<Settings> initAction = null)
         {
             Settings settings;
 
             if (File.Exists(_settingsPath))
             {
                 using (var stream = new FileStream(_settingsPath, FileMode.Open))
-                    settings = (Settings)_serializer.ReadObject(stream);
+                    settings = (Settings) _serializer.ReadObject(stream);
             }
             else
-                settings = new Settings();
+            {
+                settings = initAction != null
+                    ? initAction()
+                    : new Settings();
+
+                Save(settings);
+            }
 
             return settings;
         }

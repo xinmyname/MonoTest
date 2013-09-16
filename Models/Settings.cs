@@ -7,5 +7,8 @@ namespace MonoTest.Models
     {
         [DataMember]
         public string DatabasePath { get; set; }
+
+        [DataMember]
+        public string HostUrl { get; set; }
     }
 }
