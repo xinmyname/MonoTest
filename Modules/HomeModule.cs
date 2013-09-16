@@ -7,12 +7,12 @@ namespace MonoTest.Modules
 {
     public class HomeModule : NancyModule
     {
-        public HomeModule(ILog log)
+        public HomeModule(ILog log, ItemStore itemStore)
         {
             Get["/"] = _ =>
             {
                 log.Info("Doing something...");
-                //itemStore.Add(new Item("Special Item", "A difficult to find item"));
+                itemStore.Add(new Item("Special Item", "A difficult to find item"));
                 return Response.AsJson("true");
             };
         }

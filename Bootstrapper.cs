@@ -1,7 +1,9 @@
 using System;
+using System.Configuration;
 using System.Diagnostics;
 using MonoTest.Infrastructure;
 using MonoTest.Models;
+using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Autofac;
 using Nancy.Hosting.Self;
 using log4net;
@@ -12,18 +14,19 @@ namespace MonoTest
 	class Bootstrapper : AutofacNancyBootstrapper
 	{
 	    private readonly ILog _log;
-	    private readonly ResourceStore _resStore;
 	    private readonly string _hostUrl;
 	    private readonly NancyHost _host;
 
 	    public static void Main(string[] args)
-		{
-		    IContainer container = BuildContainer();
-	        var log = container.Resolve<ILog>();
+	    {
+	        var log = LogManager.GetLogger("MonoTest");
 
 	        try
 	        {
-                var bootstrapper = container.Resolve<Bootstrapper>();
+	            var bootstrapper = new Bootstrapper(
+	                log,
+	                ConfigurationManager.AppSettings["HostUrl"]);
+
                 bootstrapper.Run();
 	        }
 	        catch (Exception ex)
@@ -32,22 +35,10 @@ namespace MonoTest
 	        }
 		}
 
-        public static IContainer BuildContainer()
-        {
-            var builder = new ContainerBuilder();
-
-            builder.RegisterInstance(LogManager.GetLogger("MonoTest")).As<ILog>();
-            builder.RegisterAssemblyTypes(typeof(Bootstrapper).Assembly);
-
-            return builder.Build();
-        }
-
-	    public Bootstrapper(ILog log, SettingsStore settingsStore, ResourceStore resStore)
+	    public Bootstrapper(ILog log, string hostUrl)
 	    {
 	        _log = log;
-	        _resStore = resStore;
-	        Settings settings = settingsStore.Load(Init);
-	        _hostUrl = settings.HostUrl;
+	        _hostUrl = hostUrl;
 
             var hostConfig = new HostConfiguration
             {
@@ -56,19 +47,6 @@ namespace MonoTest
 
 	        _host = new NancyHost(this, hostConfig, new Uri(_hostUrl));
 	    }
-
-        public Settings Init()
-        {
-            var settings = new Settings
-            {
-                HostUrl = "http://localhost:8081/",
-                DatabasePath = DocumentPath.For("MonoTest", "s3db")
-            };
-
-            _resStore.Deploy("MonoTest.empty.s3db", settings.DatabasePath);
-
-            return settings;
-        }
 
         public void Run()
         {
@@ -86,5 +64,37 @@ namespace MonoTest
 
             _log.Info("Stopped. Goodbye!");
         }
+
+	    protected override void ConfigureApplicationContainer(ILifetimeScope existingContainer)
+	    {
+	        base.ConfigureApplicationContainer(existingContainer);
+
+	        var builder = new ContainerBuilder();
+
+	        builder.RegisterInstance(_log).As<ILog>();
+	        builder.RegisterAssemblyTypes(GetType().Assembly);
+
+	        builder.Update(existingContainer.ComponentRegistry);
+	    }
+
+	    protected override void ApplicationStartup(ILifetimeScope container, IPipelines pipelines)
+	    {
+	        base.ApplicationStartup(container, pipelines);
+
+	        var settingsStore = container.Resolve<SettingsStore>();
+	        var resStore = container.Resolve<ResourceStore>();
+
+	        if (settingsStore.Load() == null)
+	        {
+                var settings = new Settings
+                {
+                    DatabasePath = DocumentPath.For("MonoTest", "s3db")
+                };
+
+                resStore.Deploy("MonoTest.empty.s3db", settings.DatabasePath);
+
+	            settingsStore.Save(settings);
+	        }
+	    }
 	}
 }
