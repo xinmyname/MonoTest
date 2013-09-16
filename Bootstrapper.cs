@@ -74,7 +74,6 @@ namespace MonoTest
 
 	        builder.RegisterInstance(_log).As<ILog>();
 	        builder.RegisterAssemblyTypes(GetType().Assembly);
-	        builder.RegisterType<RazorViewEngine>();
 
 	        builder.Update(existingContainer.ComponentRegistry);
 	    }
