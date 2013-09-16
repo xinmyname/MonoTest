@@ -1,23 +1,35 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|x86" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Bootstrapper.cs">
     <Files>
-      <File FileName="Bootstrapper.cs" Line="15" Column="3" />
-      <File FileName="ResourceManager.cs" Line="51" Column="1" />
+      <File FileName="Bootstrapper.cs" Line="34" Column="1" />
+      <File FileName="Infrastructure/DatabaseFactory.cs" Line="39" Column="1" />
+      <File FileName="Infrastructure/DocumentPath.cs" Line="11" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="MonoTest" expanded="True">
+            <Node name="References" expanded="True" />
+            <Node name="Infrastructure" expanded="True" />
             <Node name="Resources" expanded="True" />
             <Node name="Bootstrapper.cs" selected="True" />
           </Node>
         </State>
       </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>_sqliteAssembly</Value>
+          <Value>exportedTypes</Value>
+        </State>
+      </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/sherwooda/Work/MonoTest/Bootstrapper.cs" line="34" column="23" />
+      <Breakpoint file="/Users/sherwooda/Work/MonoTest/Bootstrapper.cs" line="38" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
