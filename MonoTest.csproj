@@ -31,6 +31,9 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>lib\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Community.CsharpSqlite">
       <HintPath>lib\Community.CsharpSqlite.dll</HintPath>
     </Reference>
@@ -41,9 +44,6 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Data" />
-    <Reference Include="Ninject">
-      <HintPath>lib\Ninject.dll</HintPath>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>lib\log4net.dll</HintPath>
     </Reference>
