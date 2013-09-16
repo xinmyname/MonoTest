@@ -8,24 +8,28 @@ namespace MonoTest.Infrastructure
 {
     public class DatabaseFactory
     {
+        private static readonly Assembly SQLiteAssembly;
+
         private readonly string _dbPath;
-		private readonly Assembly _sqliteAssembly;
 		private readonly string _conStr;
 		private readonly Type _sqliteConnectionType;
+
+        static DatabaseFactory()
+        {
+            // Dynamically load SQLite ADO.NET depending on platform
+            SQLiteAssembly = Assembly.Load(Environment.OSVersion.Platform == PlatformID.Unix
+                ? "Mono.Data.Sqlite"
+                : "Community.CsharpSqlite.SQLiteClient");
+        }
 
         public DatabaseFactory(SettingsStore settingsStore)
         {
             _dbPath = settingsStore.Load().DatabasePath;
 
-			if (Environment.OSVersion.Platform == PlatformID.Unix)
-				_sqliteAssembly = Assembly.Load("Mono.Data.Sqlite");
-			else
-				_sqliteAssembly = Assembly.Load("Community.CsharpSqlite.SQLiteClient");
+            Type[] exportedTypes = SQLiteAssembly.GetExportedTypes();
 
-			Type[] exportedTypes = _sqliteAssembly.GetExportedTypes();
-
-			Type sqliteConnectionStringBuilderType = exportedTypes.Where(t => t.Name == "SqliteConnectionStringBuilder").Single();
-			_sqliteConnectionType = exportedTypes.Where(t => t.Name == "SqliteConnection").Single();
+			Type sqliteConnectionStringBuilderType = exportedTypes.Single(t => t.Name == "SqliteConnectionStringBuilder");
+			_sqliteConnectionType = exportedTypes.Single(t => t.Name == "SqliteConnection");
 
 			object conBuilder = Activator.CreateInstance(sqliteConnectionStringBuilderType);
 			sqliteConnectionStringBuilderType.GetProperty("Uri").SetValue(conBuilder, new Uri(_dbPath).AbsoluteUri, null);

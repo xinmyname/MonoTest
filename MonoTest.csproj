@@ -34,6 +34,12 @@
     <Reference Include="Autofac">
       <HintPath>lib\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="Community.CsharpSqlite">
+      <HintPath>lib\Community.CsharpSqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="Community.CsharpSqlite.SQLiteClient">
+      <HintPath>lib\Community.CsharpSqlite.SQLiteClient.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
