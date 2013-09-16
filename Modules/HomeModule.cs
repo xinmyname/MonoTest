@@ -11,9 +11,12 @@ namespace MonoTest.Modules
         {
             Get["/"] = _ =>
             {
-                log.Info("Doing something...");
-                itemStore.Add(new Item("Special Item", "A difficult to find item"));
-                return Response.AsJson("true");
+                var model = new
+                {
+                    Items = new[] {new Item("A Test Item", "A dark, frothy item with tangerine overtones.")}
+                };
+
+                return View["Index", model];
             };
         }
     }

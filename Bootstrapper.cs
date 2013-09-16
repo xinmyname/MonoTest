@@ -6,6 +6,7 @@ using MonoTest.Models;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.Autofac;
 using Nancy.Hosting.Self;
+using Nancy.ViewEngines.Razor;
 using log4net;
 using Autofac;
 
@@ -73,6 +74,7 @@ namespace MonoTest
 
 	        builder.RegisterInstance(_log).As<ILog>();
 	        builder.RegisterAssemblyTypes(GetType().Assembly);
+	        builder.RegisterType<RazorViewEngine>();
 
 	        builder.Update(existingContainer.ComponentRegistry);
 	    }

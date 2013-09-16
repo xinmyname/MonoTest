@@ -1,0 +1,22 @@
+﻿@using MonoTest.Models
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Home Page</h1>
+    
+    <ul>
+    @foreach (Item item in Model.Items)
+    {
+        <li><a href="/Item/@item.Id">@item.Name</a><span>@item.Description</span></li>
+    }
+    </ul>
+
+</body>
+</html>
