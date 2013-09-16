@@ -36,7 +36,7 @@ namespace MonoTest
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterInstance(LogManager.GetLogger("MonoTest"));
+            builder.RegisterInstance(LogManager.GetLogger("MonoTest")).As<ILog>();
             builder.RegisterAssemblyTypes(typeof(Bootstrapper).Assembly);
 
             return builder.Build();

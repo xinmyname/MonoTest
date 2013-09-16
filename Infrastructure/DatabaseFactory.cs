@@ -18,7 +18,7 @@ namespace MonoTest.Infrastructure
             // Dynamically load SQLite ADO.NET depending on platform
             SQLiteAssembly = Assembly.Load(Environment.OSVersion.Platform == PlatformID.Unix
                 ? "Mono.Data.Sqlite"
-                : "Community.CsharpSqlite.SQLiteClient");
+                : "System.Data.SQLite");
         }
 
         public DatabaseFactory(SettingsStore settingsStore)

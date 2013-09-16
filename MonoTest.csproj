@@ -31,31 +31,36 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>lib\Autofac.dll</HintPath>
+    <Reference Include="Autofac, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Autofac.3.1.1\lib\net40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Community.CsharpSqlite">
-      <HintPath>lib\Community.CsharpSqlite.dll</HintPath>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="Community.CsharpSqlite.SQLiteClient">
-      <HintPath>lib\Community.CsharpSqlite.SQLiteClient.dll</HintPath>
+    <Reference Include="Nancy, Version=0.20.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Nancy.0.20.0\lib\net40\Nancy.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy">
-      <HintPath>lib\Nancy.dll</HintPath>
+    <Reference Include="Nancy.Bootstrappers.Autofac, Version=0.20.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Nancy.Bootstrappers.Autofac.0.20.0\lib\net40\Nancy.Bootstrappers.Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Nancy.Bootstrappers.Autofac">
-      <HintPath>lib\Nancy.Bootstrappers.Autofac.dll</HintPath>
-    </Reference>
-    <Reference Include="Nancy.Hosting.Self">
-      <HintPath>lib\Nancy.Hosting.Self.dll</HintPath>
+    <Reference Include="Nancy.Hosting.Self, Version=0.20.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\Nancy.Hosting.Self.0.20.0\lib\net40\Nancy.Hosting.Self.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>packages\System.Data.SQLite.MSIL.1.0.88.0\lib\net40\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq">
+      <HintPath>packages\System.Data.SQLite.MSIL.1.0.88.0\lib\net40\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Data" />
-    <Reference Include="log4net">
-      <HintPath>lib\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +80,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
